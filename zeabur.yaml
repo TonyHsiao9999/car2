@@ -13,14 +13,12 @@ services:
       command: npm start
 
   car2-client:
-    type: web
-    source: ./client
+    type: nginx
+    source: ./client/build
     env:
       REACT_APP_API_URL: https://car2-server.zeabur.app
     build:
       command: |
         cd client
         npm install
-        npm run build
-    deploy:
-      command: npx serve -s build -l 8080 
+        npm run build 
