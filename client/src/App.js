@@ -6,6 +6,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const handleRunAutomation = async () => {
+    setLoading(true);
     setStatus('正在執行自動化...');
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/run-automation`, {
@@ -19,6 +20,8 @@ function App() {
       setStatus(data.message);
     } catch (error) {
       setStatus('執行失敗：' + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
