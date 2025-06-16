@@ -3,7 +3,7 @@ services:
     type: node
     env:
       NODE_ENV: production
-      PORT: 3001
+      PORT: 8080
       CHROME_BIN: /usr/bin/chromium-browser
       ID_NUMBER: A102574899
       PASSWORD: visi319VISI
