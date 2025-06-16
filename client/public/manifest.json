@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "長照訂車",
+  "name": "長照訂車自動化系統",
   "icons": [
     {
       "src": "favicon.ico",
