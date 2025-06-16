@@ -14,12 +14,13 @@ services:
       startCommand: node index.js
 
   car2-client:
-    type: static
-    source: ./client/build
+    type: web
+    source: ./client
     env:
       REACT_APP_API_URL: ${ZEABUR_SERVICE_URL_car2-server}
     build:
       command: |
-        cd client
         npm install
-        npm run build 
+        npm run build
+    deploy:
+      startCommand: serve -s build 
