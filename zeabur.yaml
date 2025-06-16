@@ -17,6 +17,6 @@ services:
     type: static
     source: ./client/build
     env:
-      REACT_APP_API_URL: https://car2-server.zeabur.app
+      REACT_APP_API_URL: ${ZEABUR_SERVICE_URL_car2-server}
     build:
       command: cd ../client && npm install && npm run build 
