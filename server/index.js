@@ -7,6 +7,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// 添加請求日誌中間件
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log('Headers:', req.headers);
+  next();
+});
+
 const ID_NUMBER = process.env.ID_NUMBER || 'A102574899';
 const PASSWORD = process.env.PASSWORD || 'visi319VISI';
 
@@ -133,11 +140,22 @@ async function runAutomation() {
 
 // API 路由
 app.post('/api/run-automation', async (req, res) => {
+  console.log('收到自動化請求');
   try {
     const result = await runAutomation();
+    console.log('自動化執行結果:', result);
     res.json(result);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('自動化執行錯誤:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    res.status(500).json({ 
+      success: false, 
+      message: error.message,
+      details: error.stack
+    });
   }
 });
 

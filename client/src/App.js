@@ -8,23 +8,36 @@ function App() {
   const handleRunAutomation = async () => {
     setLoading(true);
     setStatus('正在執行自動化...');
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    console.log('API URL:', apiUrl);
+    
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/run-automation`, {
+      console.log('開始發送請求...');
+      const response = await fetch(`${apiUrl}/api/run-automation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         }
       });
       
+      console.log('收到回應:', response.status, response.statusText);
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('回應內容:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
       }
       
       const data = await response.json();
+      console.log('解析回應數據:', data);
       setStatus(data.message);
     } catch (error) {
-      console.error('Error:', error);
-      setStatus('執行失敗：' + error.message);
+      console.error('完整錯誤信息:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      });
+      setStatus(`執行失敗：${error.message}`);
     } finally {
       setLoading(false);
     }
