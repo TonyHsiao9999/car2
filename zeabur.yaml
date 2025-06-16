@@ -19,4 +19,7 @@ services:
     env:
       REACT_APP_API_URL: ${ZEABUR_SERVICE_URL_car2-server}
     build:
-      command: cd ../client && npm install && npm run build 
+      command: |
+        cd client
+        npm install
+        npm run build 
