@@ -13,12 +13,7 @@ services:
       command: npm start
 
   car2-client:
-    type: nginx
-    source: ./client/build
+    type: docker
+    source: ./client
     env:
-      REACT_APP_API_URL: https://car2-server.zeabur.app
-    build:
-      command: |
-        cd client
-        npm install
-        npm run build 
+      REACT_APP_API_URL: https://car2-server.zeabur.app 
