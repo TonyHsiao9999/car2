@@ -12,11 +12,8 @@ function App() {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/run-automation`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        credentials: 'include',
-        mode: 'cors'
+          'Content-Type': 'application/json'
+        }
       });
       
       if (!response.ok) {

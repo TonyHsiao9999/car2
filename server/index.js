@@ -4,12 +4,7 @@ const puppeteer = require('puppeteer');
 require('dotenv').config();
 
 const app = express();
-app.use(cors({
-  origin: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Accept']
-}));
+app.use(cors());
 app.use(express.json());
 
 const ID_NUMBER = process.env.ID_NUMBER || 'A102574899';
