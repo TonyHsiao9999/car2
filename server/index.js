@@ -5,9 +5,10 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: ['https://car2-client.vercel.app', 'http://localhost:3000'],
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Accept']
 }));
 app.use(express.json());
 

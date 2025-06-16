@@ -13,12 +13,20 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
+        credentials: 'include',
+        mode: 'cors'
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       
       const data = await response.json();
       setStatus(data.message);
     } catch (error) {
+      console.error('Error:', error);
       setStatus('執行失敗：' + error.message);
     } finally {
       setLoading(false);
