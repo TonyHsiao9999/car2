@@ -1,22 +1,22 @@
 services:
-  - name: car2-server
+  car2-server:
     type: node
     source: ./server
     env:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 3001
-      - key: CHROME_BIN
-        value: /usr/bin/chromium-browser
-      - key: ID_NUMBER
-        value: A102574899
-      - key: PASSWORD
-        value: visi319VISI
+      NODE_ENV: production
+      PORT: 3001
+      CHROME_BIN: /usr/bin/chromium-browser
+      ID_NUMBER: A102574899
+      PASSWORD: visi319VISI
+    build:
+      command: npm install
+    deploy:
+      startCommand: node index.js
 
-  - name: car2-client
+  car2-client:
     type: static
     source: ./client/build
     env:
-      - key: REACT_APP_API_URL
-        value: https://car2-server.zeabur.app 
+      REACT_APP_API_URL: https://car2-server.zeabur.app
+    build:
+      command: cd ../client && npm install && npm run build 
