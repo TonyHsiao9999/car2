@@ -4,14 +4,18 @@ const puppeteer = require('puppeteer');
 require('dotenv').config();
 
 const app = express();
+
+// 配置 CORS
 app.use(cors({
-  origin: [
-    /\.vercel\.app$/,
-    'http://localhost:3000'
-  ],
+  origin: true,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type'],
+  credentials: false
 }));
+
+// 處理 OPTIONS 請求
+app.options('*', cors());
+
 app.use(express.json());
 
 // 添加請求日誌中間件
@@ -164,6 +168,11 @@ app.post('/api/run-automation', async (req, res) => {
       details: error.stack
     });
   }
+});
+
+// 健康檢查端點
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
 });
 
 const PORT = process.env.PORT || 3001;
