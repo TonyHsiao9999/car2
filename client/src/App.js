@@ -5,8 +5,7 @@ function App() {
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const runAutomation = async () => {
-    setLoading(true);
+  const handleRunAutomation = async () => {
     setStatus('正在執行自動化...');
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/run-automation`, {
@@ -15,12 +14,12 @@ function App() {
           'Content-Type': 'application/json',
         },
       });
+      
       const data = await response.json();
       setStatus(data.message);
     } catch (error) {
-      setStatus(`錯誤: ${error.message}`);
+      setStatus('執行失敗：' + error.message);
     }
-    setLoading(false);
   };
 
   return (
@@ -29,7 +28,7 @@ function App() {
         <h1>長照訂車自動化</h1>
         <button 
           className="run-button" 
-          onClick={runAutomation} 
+          onClick={handleRunAutomation} 
           disabled={loading}
         >
           {loading ? '執行中...' : '開始預約'}

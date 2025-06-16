@@ -12,6 +12,9 @@ services:
       command: npm install
     deploy:
       startCommand: node index.js
+    routes:
+      - path: /api/*
+        target: server
 
   car2-client:
     type: static
@@ -22,4 +25,7 @@ services:
       command: |
         cd client
         npm install
-        npm run build 
+        npm run build
+    routes:
+      - path: /*
+        target: client 
