@@ -7,6 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const ID_NUMBER = process.env.ID_NUMBER || 'A102574899';
+const PASSWORD = process.env.CAR_PASSWORD || 'visi319VISI';
+
 // 自動化腳本
 async function runAutomation() {
   const browser = await puppeteer.launch({
@@ -34,11 +37,11 @@ async function runAutomation() {
     
     // 輸入身分證字號
     await page.waitForSelector('input#IDNumber');
-    await page.type('input#IDNumber', process.env.ID_NUMBER || 'A102574899');
+    await page.type('input#IDNumber', ID_NUMBER);
     
     // 輸入密碼
     await page.waitForSelector('input#password');
-    await page.type('input#password', process.env.PASSWORD || 'visi319VISI');
+    await page.type('input#password', PASSWORD);
     
     // 點擊確認按鈕
     await page.waitForSelector('a.button-fill:nth-child(2)');

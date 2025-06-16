@@ -2,10 +2,19 @@ version: 2
 builds:
   - src: server/index.js
     use: @vercel/node
+    config:
+      env:
+        NODE_ENV: production
+        PORT: 3001
+        CHROME_BIN: /usr/bin/chromium-browser
+        ID_NUMBER: A102574899
+        CAR_PASSWORD: visi319VISI
   - src: client/package.json
     use: @vercel/static-build
     config:
       distDir: build
+      env:
+        REACT_APP_API_URL: https://car2-server.zeabur.app
 
 routes:
   - src: /api/(.*)
