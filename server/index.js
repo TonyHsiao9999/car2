@@ -4,11 +4,15 @@ const puppeteer = require('puppeteer');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['https://car2-client.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
 const ID_NUMBER = process.env.ID_NUMBER || 'A102574899';
-const PASSWORD = process.env.CAR_PASSWORD || 'visi319VISI';
+const PASSWORD = process.env.PASSWORD || 'visi319VISI';
 
 // 自動化腳本
 async function runAutomation() {
