@@ -4,7 +4,14 @@ const puppeteer = require('puppeteer');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://car2-t9cr-lcrq5h4v7-tonyhsiao-gmailcoms-projects.vercel.app',
+    'http://localhost:3000'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 
 // 添加請求日誌中間件
